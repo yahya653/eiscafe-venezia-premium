@@ -31,55 +31,61 @@ const t = {
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden" aria-labelledby="hero-heading">
   <div id="webgl-canvas" class="absolute inset-0 -z-10" aria-hidden="true"></div>
 
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-venezia-cream/50 to-venezia-cream" aria-hidden="true"></div>
+  <!-- Animated gradient overlay -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-venezia-coral/10 via-transparent to-venezia-mint/10 animate-gradient-shift" aria-hidden="true"></div>
 
   <div class="relative container-fluid z-10 pt-20 lg:pt-28 pb-fluid-16">
     <div class="max-w-4xl mx-auto text-center">
-      <div class="reveal stagger-1" data-reveal>
+      <div class="reveal stagger-1" data-reveal data-gsap="fadeUp" data-delay="0.1">
         <span class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-fluid-4 py-fluid-2 text-fluid-sm font-medium text-accent border border-accent/20 mb-fluid-6">
           <span class="relative h-2 w-2 rounded-full bg-accent animate-pulse" aria-hidden="true"></span>
           {site.tagline}
         </span>
       </div>
 
-      <h1 id="hero-heading" class="font-display text-fluid-4xl lg:text-fluid-5xl xl:text-fluid-6xl font-bold tracking-tight text-foreground mb-fluid-6 reveal stagger-2" data-reveal>
-        <span class="block text-gradient-venezia">{t.headline}</span>
+      <h1 id="hero-heading" class="font-display text-fluid-4xl lg:text-fluid-5xl xl:text-fluid-6xl font-bold tracking-tight text-foreground mb-fluid-6 reveal stagger-2" data-reveal data-gsap="fadeUp" data-delay="0.2">
+        <span class="block text-gradient-venezia relative">
+          {t.headline}
+          <span class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-venezia-coral via-venezia-gold to-venezia-mint rounded-full scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-700 ease-expo-out" aria-hidden="true"></span>
+        </span>
       </h1>
 
-      <p class="text-fluid-lg lg:text-fluid-xl text-muted-foreground max-w-2xl mx-auto mb-fluid-10 reveal stagger-3" data-reveal>
+      <p class="text-fluid-lg lg:text-fluid-xl text-muted-foreground max-w-2xl mx-auto mb-fluid-10 reveal stagger-3" data-reveal data-gsap="fadeUp" data-delay="0.3">
         {t.subheadline}
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal stagger-4" data-reveal>
-        <a href="#speisekarte" class="btn-primary text-fluid-base px-fluid-8 py-fluid-4 w-full sm:w-auto">
-          {t.cta}
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal stagger-4" data-reveal data-gsap="fadeUp" data-delay="0.4">
+        <a href="#speisekarte" class="btn-primary text-fluid-base px-fluid-8 py-fluid-4 w-full sm:w-auto group relative overflow-hidden">
+          <span class="relative z-10">{t.cta}</span>
           <svg class="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
+          <span class="absolute inset-0 bg-gradient-to-r from-venezia-gold to-venezia-coral opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></span>
         </a>
-        <a href="#ueber-uns" class="btn-outline text-fluid-base px-fluid-8 py-fluid-4 w-full sm:w-auto">
-          {t.ctaSecondary}
+        <a href="#ueber-uns" class="btn-outline text-fluid-base px-fluid-8 py-fluid-4 w-full sm:w-auto group relative overflow-hidden">
+          <span class="relative z-10">{t.ctaSecondary}</span>
+          <span class="absolute inset-0 bg-accent scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-expo-out" aria-hidden="true"></span>
         </a>
       </div>
 
-      <div class="mt-fluid-16 reveal stagger-5" data-reveal>
+      <div class="mt-fluid-16 reveal stagger-5" data-reveal data-gsap="fadeUp" data-delay="0.5">
         <div class="flex items-center justify-center gap-fluid-10 text-fluid-sm text-muted-foreground">
-          <div class="flex flex-col items-center gap-1">
+          <div class="flex flex-col items-center gap-1 stat-item" data-gsap="counter" data-target="1987" data-suffix="">
             <div class="font-display text-fluid-3xl font-bold text-accent">1987</div>
             <span>Gegründet</span>
           </div>
           <div class="w-px h-8 bg-border"></div>
-          <div class="flex flex-col items-center gap-1">
+          <div class="flex flex-col items-center gap-1 stat-item" data-gsap="counter" data-target="38" data-suffix="+">
             <div class="font-display text-fluid-3xl font-bold text-accent">38+</div>
             <span>Sorten</span>
           </div>
           <div class="w-px h-8 bg-border"></div>
-          <div class="flex flex-col items-center gap-1">
+          <div class="flex flex-col items-center gap-1 stat-item" data-gsap="counter" data-target="4.7" data-suffix="★">
             <div class="font-display text-fluid-3xl font-bold text-accent">4.7★</div>
             <span>Bewertung</span>
           </div>
           <div class="w-px h-8 bg-border"></div>
-          <div class="flex flex-col items-center gap-1">
+          <div class="flex flex-col items-center gap-1 stat-item" data-gsap="counter" data-target="100" data-suffix="%">
             <div class="font-display text-fluid-3xl font-bold text-accent">100%</div>
             <span>Handgemacht</span>
           </div>
@@ -87,7 +93,7 @@ const t = {
       </div>
     </div>
 
-    <div class="absolute bottom-fluid-8 left-1/2 -translate-x-1/2 reveal stagger-6 animate-bounce" data-reveal aria-hidden="true">
+    <div class="absolute bottom-fluid-8 left-1/2 -translate-x-1/2 reveal stagger-6" data-reveal data-gsap="bounce" aria-hidden="true">
       <svg class="h-8 w-8 text-foreground/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
@@ -97,7 +103,7 @@ const t = {
 </section>
 
 <script is:inline>
-  // Three.js WebGL Hero Background
+  // Enhanced Three.js WebGL Hero Background with Ice Cream Scoops
   (async () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!window.HTMLCanvasElement) return;
@@ -122,14 +128,15 @@ const t = {
     renderer.setClearColor(0x000000, 0);
     canvasContainer.appendChild(renderer.domElement);
 
-    // Cream-colored particles floating like ice cream
-    const particleCount = 800;
+    // --- 1. Atmospheric Particles (Cream tones) ---
+    const particleCount = 600;
     const geometry = new Three.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
     const colors = new Float32Array(particleCount * 3);
     const velocities = new Float32Array(particleCount * 3);
     const phases = new Float32Array(particleCount);
+    const alphas = new Float32Array(particleCount);
 
     const palette = [
       new Three.Color(0xFFE8D0), // warm
@@ -137,10 +144,11 @@ const t = {
       new Three.Color(0xFF9F7A), // coral
       new Three.Color(0xFFF8F0), // cream
       new Three.Color(0xA8E6CF), // mint
+      new Three.Color(0xD4A843), // gold
     ];
 
     for (let i = 0; i < particleCount; i++) {
-      const radius = 10 + Math.random() * 20;
+      const radius = 8 + Math.random() * 25;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
 
@@ -148,18 +156,19 @@ const t = {
       positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = radius * Math.cos(phi);
 
-      sizes[i] = 0.08 + Math.random() * 0.25;
+      sizes[i] = 0.06 + Math.random() * 0.3;
 
       const color = palette[Math.floor(Math.random() * palette.length)];
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
 
-      velocities[i * 3] = (Math.random() - 0.5) * 0.002;
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.002;
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.002;
+      velocities[i * 3] = (Math.random() - 0.5) * 0.0015;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.0015;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.0015;
 
       phases[i] = Math.random() * Math.PI * 2;
+      alphas[i] = 0.3 + Math.random() * 0.4;
     }
 
     geometry.setAttribute('position', new Three.BufferAttribute(positions, 3));
@@ -167,29 +176,98 @@ const t = {
     geometry.setAttribute('color', new Three.BufferAttribute(colors, 3));
     geometry.setAttribute('velocity', new Three.BufferAttribute(velocities, 3));
     geometry.setAttribute('phase', new Three.BufferAttribute(phases, 1));
+    geometry.setAttribute('alpha', new Three.BufferAttribute(alphas, 1));
 
-    const material = new Three.PointsMaterial({
+    const particleMaterial = new Three.PointsMaterial({
       size: 1,
       vertexColors: true,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.5,
       sizeAttenuation: true,
       blending: Three.AdditiveBlending,
       depthWrite: false,
     });
 
-    const particles = new Three.Points(geometry, material);
+    const particles = new Three.Points(geometry, particleMaterial);
     scene.add(particles);
 
-    // Soft ambient light
-    const ambientLight = new Three.AmbientLight(0xFFF8F0, 0.5);
+    // --- 2. Floating Ice Cream Scoops (3D Spheres) ---
+    const scoopCount = 12;
+    const scoopGeometry = new Three.SphereGeometry(0.6, 32, 32);
+    const scoops: Three.Mesh[] = [];
+    const scoopData: { pos: Three.Vector3; vel: Three.Vector3; rot: Three.Euler; scale: number; color: Three.Color }[] = [];
+
+    const scoopColors = [
+      0xFF9F7A, // coral
+      0xFFD4B8, // peach
+      0xA8E6CF, // mint
+      0xFFF8F0, // cream
+      0xD4A843, // gold
+      0xE86C4A, // deep coral
+    ];
+
+    for (let i = 0; i < scoopCount; i++) {
+      const color = new Three.Color(scoopColors[Math.floor(Math.random() * scoopColors.length)]);
+      const material = new Three.MeshPhysicalMaterial({
+        color,
+        roughness: 0.7,
+        metalness: 0.0,
+        clearcoat: 0.3,
+        clearcoatRoughness: 0.2,
+        transmission: 0.1,
+        thickness: 0.5,
+      });
+
+      const scoop = new Three.Mesh(scoopGeometry, material);
+      
+      const radius = 12 + Math.random() * 10;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      
+      const pos = new Three.Vector3(
+        radius * Math.sin(phi) * Math.cos(theta),
+        radius * Math.sin(phi) * Math.sin(theta),
+        radius * Math.cos(phi)
+      );
+      scoop.position.copy(pos);
+      
+      const vel = new Three.Vector3(
+        (Math.random() - 0.5) * 0.003,
+        (Math.random() - 0.5) * 0.003,
+        (Math.random() - 0.5) * 0.003
+      );
+      
+      const rot = new Three.Euler(
+        Math.random() * Math.PI,
+        Math.random() * Math.PI,
+        Math.random() * Math.PI
+      );
+      
+      const scale = 0.5 + Math.random() * 0.8;
+      scoop.scale.setScalar(scale);
+
+      scoopData.push({ pos, vel, rot, scale, color });
+      scoops.push(scoop);
+      scene.add(scoop);
+    }
+
+    // --- 3. Lights ---
+    const ambientLight = new Three.AmbientLight(0xFFF8F0, 0.4);
     scene.add(ambientLight);
 
-    const pointLight = new Three.PointLight(0xFF9F7A, 0.3, 50);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
+    const keyLight = new Three.DirectionalLight(0xFFE8D0, 0.6);
+    keyLight.position.set(10, 20, 10);
+    scene.add(keyLight);
 
-    // Mouse interaction
+    const fillLight = new Three.PointLight(0xFF9F7A, 0.4, 50);
+    fillLight.position.set(-10, 5, 10);
+    scene.add(fillLight);
+
+    const rimLight = new Three.PointLight(0xA8E6CF, 0.3, 40);
+    rimLight.position.set(0, -10, -15);
+    scene.add(rimLight);
+
+    // --- Interaction ---
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
@@ -200,7 +278,6 @@ const t = {
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     }, { passive: true });
 
-    // Touch support
     document.addEventListener('touchmove', (e) => {
       if (e.touches[0]) {
         mouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
@@ -208,48 +285,49 @@ const t = {
       }
     }, { passive: true });
 
-    // Scroll parallax
     let scrollY = 0;
     window.addEventListener('scroll', () => {
       scrollY = window.scrollY;
     }, { passive: true });
 
-    // Animation loop
+    // --- Animation Loop ---
     let frame = 0;
     function animate() {
       requestAnimationFrame(animate);
       frame++;
 
       // Smooth mouse follow
-      targetX += (mouseX - targetX) * 0.02;
-      targetY += (mouseY - targetY) * 0.02;
+      targetX += (mouseX - targetX) * 0.015;
+      targetY += (mouseY - targetY) * 0.015;
 
       // Camera gentle drift
-      camera.position.x += (targetX * 2 - camera.position.x) * 0.01;
-      camera.position.y += (targetY * 2 - camera.position.y) * 0.01;
+      camera.position.x += (targetX * 3 - camera.position.x) * 0.008;
+      camera.position.y += (targetY * 3 - camera.position.y) * 0.008;
       camera.lookAt(0, 0, 0);
 
-      // Particle animation
+      // 1. Particles animation
       const pos = geometry.attributes.position;
       const vel = geometry.attributes.velocity;
       const ph = geometry.attributes.phase;
+      const alp = geometry.attributes.alpha;
 
       for (let i = 0; i < particleCount; i++) {
         const t = frame * 0.001 + ph.array[i];
 
-        // Gentle orbital motion
-        pos.array[i * 3] += vel.array[i * 3] + Math.sin(t) * 0.001;
-        pos.array[i * 3 + 1] += vel.array[i * 3 + 1] + Math.cos(t) * 0.001;
-        pos.array[i * 3 + 2] += vel.array[i * 3 + 2] + Math.sin(t * 0.7) * 0.0005;
+        pos.array[i * 3] += vel.array[i * 3] + Math.sin(t) * 0.0008;
+        pos.array[i * 3 + 1] += vel.array[i * 3 + 1] + Math.cos(t) * 0.0008;
+        pos.array[i * 3 + 2] += vel.array[i * 3 + 2] + Math.sin(t * 0.5) * 0.0004;
 
-        // Boundary wrap
+        // Breathing alpha
+        alp.array[i] = 0.3 + Math.sin(t * 0.7) * 0.2;
+
         const dist = Math.sqrt(
           pos.array[i * 3] ** 2 +
           pos.array[i * 3 + 1] ** 2 +
           pos.array[i * 3 + 2] ** 2
         );
-        if (dist > 35) {
-          const radius = 10 + Math.random() * 15;
+        if (dist > 40) {
+          const radius = 8 + Math.random() * 20;
           const theta = Math.random() * Math.PI * 2;
           const phi = Math.acos(2 * Math.random() - 1);
           pos.array[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
@@ -258,13 +336,53 @@ const t = {
         }
       }
       pos.needsUpdate = true;
+      alp.needsUpdate = true;
 
-      // Subtle rotation of entire system
-      particles.rotation.y += 0.00005;
-      particles.rotation.x += 0.00002;
+      particles.rotation.y += 0.00003;
+      particles.rotation.x += 0.00001;
+      particles.position.y = -scrollY * 0.008;
 
-      // Scroll parallax on particles
-      particles.position.y = -scrollY * 0.01;
+      // 2. Scoops animation
+      scoops.forEach((scoop, i) => {
+        const data = scoopData[i];
+        const t = frame * 0.001;
+
+        // Orbital drift
+        data.pos.x += data.vel.x + Math.sin(t + i) * 0.001;
+        data.pos.y += data.vel.y + Math.cos(t * 0.7 + i) * 0.001;
+        data.pos.z += data.vel.z + Math.sin(t * 0.5 + i) * 0.0005;
+
+        // Rotation
+        data.rot.x += 0.0005;
+        data.rot.y += 0.001;
+        data.rot.z += 0.0003;
+
+        // Bobbing
+        const bob = Math.sin(t * 0.5 + i) * 0.15;
+        data.pos.y += bob * 0.01;
+
+        scoop.position.lerp(data.pos, 0.05);
+        scoop.rotation.x = data.rot.x;
+        scoop.rotation.y = data.rot.y;
+        scoop.rotation.z = data.rot.z;
+
+        // Boundary wrap
+        const dist = data.pos.length();
+        if (dist > 45) {
+          const radius = 12 + Math.random() * 15;
+          const theta = Math.random() * Math.PI * 2;
+          const phi = Math.acos(2 * Math.random() - 1);
+          data.pos.set(
+            radius * Math.sin(phi) * Math.cos(theta),
+            radius * Math.sin(phi) * Math.sin(theta),
+            radius * Math.cos(phi)
+          );
+        }
+      });
+
+      // Subtle light animation
+      keyLight.intensity = 0.5 + Math.sin(frame * 0.002) * 0.1;
+      fillLight.intensity = 0.3 + Math.cos(frame * 0.0015) * 0.1;
 
       renderer.render(scene, camera);
     }
@@ -279,10 +397,12 @@ const t = {
       renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
     });
 
-    // Cleanup on page unload
+    // Cleanup
     window.addEventListener('beforeunload', () => {
       geometry.dispose();
-      material.dispose();
+      particleMaterial.dispose();
+      scoopGeometry.dispose();
+      scoops.forEach(s => s.material.dispose());
       renderer.dispose();
     });
   })();
