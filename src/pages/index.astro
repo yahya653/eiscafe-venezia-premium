@@ -1,20 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import LoadingScreen from '../components/LoadingScreen.astro';
 import Hero from '../components/Hero.astro';
 import Menu from '../components/Menu.astro';
 import About from '../components/About.astro';
 import Location from '../components/Location.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import ScrollMedia from '../components/ScrollMedia.astro';
 ---
 
-<BaseLayout title="Eiscafe Venezia Magstadt — Authentisches Italienisches Eis seit 1987" description="Handgemachtes Eis nach traditionellen Rezepten, beste Zutaten, Leidenschaft seit 1987. 38+ Sorten, vegan & Sorbets. Besuchen Sie uns in Magstadt!" lang="de">
+<BaseLayout title="Eiscafé Venezia Magstadt — Gelato italiano seit 1987" description="Authentisches italienisches Eiscafé in Magstadt. Hausgemachtes Gelato aus frischen Zutaten, Familienbetrieb mit italienischen Wurzeln. Pistazie, Mango, Granita, Cannoli & Spaghetti-Eis." lang="de">
+  <LoadingScreen lang="de" />
   <Header />
 
   <main id="main">
     <Hero lang="de" />
     <Menu lang="de" />
+    
+    <!-- Scroll-driven Media Section (Highfield-style) -->
+    <ScrollMedia 
+      images={[
+        '/images/about/eiscafe-venezia-photo_1.webp',
+        '/images/about/eiscafe-venezia-photo_3.webp',
+        '/images/about/eiscafe-venezia-photo_4.webp',
+        '/images/about/eiscafe-venezia-photo_5.webp',
+        '/images/about/eiscafe-venezia-photo_6.webp',
+      ]}
+      alt="Eiscafé Venezia - Innenraum, Terrasse, Eistheke, Team"
+      className="my-fluid-20"
+    />
+    
     <About lang="de" />
     <Location lang="de" />
     <Contact lang="de" />

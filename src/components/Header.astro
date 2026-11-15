@@ -7,6 +7,11 @@ const site = (await import('../content/site.ts')).siteConfig;
 const currentLang = Astro.props.lang || 'de';
 const path = Astro.url.pathname;
 const basePath = path.replace(/^\/(en|it)/, '') || '/';
+const hreflangs = {
+  de: `${site.url}${basePath}`,
+  en: `${site.url}/en${basePath}`,
+  it: `${site.url}/it${basePath}`,
+};
 ---
 <header
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-expo-out
@@ -15,22 +20,79 @@ const basePath = path.replace(/^\/(en|it)/, '') || '/';
 >
   <nav class="container-fluid" aria-label="Hauptnavigation">
     <div class="flex items-center justify-between h-16 lg:h-20 gap-4">
-      <a href={basePath} class="flex items-center gap-2 shrink-0" aria-label={`${site.name} - Startseite`}>
-        <svg class="h-8 w-8 text-accent" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M16 8C12.686 8 10 10.686 10 14c0 2.5 4 8 6 10s6-7.5 6-10c0-3.314-2.686-6-6-6z" fill="currentColor" />
-          <circle cx="16" cy="14" r="2" fill="#FFF8F0" />
-        </svg>
+      <a href={basePath} class="flex items-center gap-2.5 shrink-0" aria-label={`${site.name} - Startseite`}>
+        <!-- SVG Logo -->
+        <span class="relative h-10 w-10 lg:h-11 lg:w-11 flex-shrink-0" aria-hidden="true">
+          <svg viewBox="0 0 200 200" fill="none" class="h-full w-full" aria-hidden="true">
+            <defs>
+              <linearGradient id="gelatoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF9F7A"/>
+                <stop offset="50%" stop-color="#FFF8F0"/>
+                <stop offset="100%" stop-color="#A8E6CF"/>
+              </linearGradient>
+              <linearGradient id="coneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#D4A843"/>
+                <stop offset="100%" stop-color="#B8860B"/>
+              </linearGradient>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            
+            <!-- Cone -->
+            <path d="M100 165 L70 95 Q100 90 130 95 Z" fill="url(#coneGrad)" stroke="#B8860B" stroke-width="1.5"/>
+            
+            <!-- Gelato Scoops (3 flavors: Pistachio, Stracciatella, Amarena) -->
+            <circle cx="100" cy="105" r="32" fill="#8FD4A8" filter="url(#glow)"/>
+            <ellipse cx="90" cy="98" rx="8" ry="5" fill="#7BC498" opacity="0.6"/>
+            
+            <circle cx="100" cy="60" r="30" fill="#FFF8F0" filter="url(#glow)"/>
+            <circle cx="92" cy="55" r="2.5" fill="#4A3428"/>
+            <circle cx="108" cy="52" r="2" fill="#4A3428"/>
+            <circle cx="95" cy="70" r="1.5" fill="#4A3428"/>
+            <circle cx="110" cy="68" r="2" fill="#4A3428"/>
+            <circle cx="88" cy="65" r="1.8" fill="#4A3428"/>
+            
+            <circle cx="100" cy="20" r="28" fill="#E86C4A" filter="url(#glow)"/>
+            <ellipse cx="92" cy="14" rx="7" ry="4" fill="#D4A843" opacity="0.3"/>
+            <circle cx="95" cy="12" r="3" fill="#8B2E1A"/>
+            <circle cx="112" cy="18" r="2.5" fill="#8B2E1A"/>
+            
+            <!-- Drip -->
+            <path d="M115 50 Q120 70 118 85" stroke="#E86C4A" stroke-width="4" fill="none" opacity="0.7" stroke-linecap="round"/>
+            
+            <!-- Italian flag dots -->
+            <circle cx="55" cy="110" r="4" fill="#009246"/>
+            <circle cx="55" cy="120" r="4" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.5"/>
+            <circle cx="55" cy="130" r="4" fill="#CE2B37"/>
+          </svg>
+        </span>
         <span class="font-display text-fluid-xl lg:text-fluid-2xl text-foreground hidden sm:block">
           {site.name}
         </span>
       </a>
 
       <div class="hidden lg:flex items-center gap-fluid-8">
-        <a href="#speisekarte" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300">Speisekarte</a>
-        <a href="#ueber-uns" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300">Über uns</a>
-        <a href="#standort" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300">Standort</a>
-        <a href="#kontakt" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300">Kontakt</a>
+        <a href="#speisekarte" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300 relative group">
+          Speisekarte
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-expo-out" aria-hidden="true"></span>
+        </a>
+        <a href="#ueber-uns" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300 relative group">
+          Über uns
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-expo-out" aria-hidden="true"></span>
+        </a>
+        <a href="#standort" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300 relative group">
+          Standort
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-expo-out" aria-hidden="true"></span>
+        </a>
+        <a href="#kontakt" class="text-fluid-sm font-medium text-foreground/80 hover:text-accent transition-colors duration-300 relative group">
+          Kontakt
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-expo-out" aria-hidden="true"></span>
+        </a>
       </div>
 
       <div class="flex items-center gap-3">
@@ -54,21 +116,21 @@ const basePath = path.replace(/^\/(en|it)/, '') || '/';
           </ul>
         </div>
 
-        <a href="tel:{site.location.phone}" class="hidden sm:flex btn-primary text-fluid-sm px-fluid-4 py-fluid-2" aria-label="Anrufen">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <a href="tel:{site.location.phone}" class="hidden sm:flex btn-primary text-fluid-sm px-fluid-4 py-fluid-2 group relative overflow-hidden" aria-label="Anrufen">
+          <svg class="h-5 w-5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
           </svg>
           <span>{site.location.phone.replace('+49 ', '0')}</span>
         </a>
 
         <button
-          class="lg:hidden btn-ghost p-2"
+          class="lg:hidden btn-ghost p-2 group"
           aria-label="Menü öffnen"
           aria-expanded="false"
           aria-controls="mobile-menu"
           data-mobile-menu-toggle
         >
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg class="h-6 w-6 transition-transform group-hover:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
@@ -115,16 +177,36 @@ const basePath = path.replace(/^\/(en|it)/, '') || '/';
     });
   }
 
-  // Header scroll state
+  // Header scroll state with hide-on-scroll-down
   const header = document.querySelector('[data-header]');
   let lastScroll = 0;
-  window.addEventListener('scroll', () => {
+  let ticking = false;
+  
+  function updateHeader() {
     const scrolled = window.scrollY > 20;
+    const scrollDown = window.scrollY > lastScroll;
+    
     header?.classList.toggle('bg-background/95', scrolled);
     header?.classList.toggle('backdrop-blur-xl', scrolled);
     header?.classList.toggle('shadow-card', scrolled);
     header?.classList.toggle('border-b', scrolled);
     header?.classList.toggle('border-border', scrolled);
     header?.classList.toggle('bg-transparent', !scrolled);
+    
+    // Hide on scroll down, show on scroll up (only after initial scroll)
+    if (window.scrollY > 100) {
+      header?.classList.toggle('-translate-y-full', scrollDown);
+      header?.classList.toggle('translate-y-0', !scrollDown);
+    }
+    
+    lastScroll = window.scrollY;
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
   }, { passive: true });
 </script>

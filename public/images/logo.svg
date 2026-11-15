@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Venezia Logo - Based on Instagram Profile: Gelato scoop with Italian flag colors -->
+  <defs>
+    <linearGradient id="gelatoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9F7A"/>
+      <stop offset="50%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#A8E6CF"/>
+    </linearGradient>
+    <linearGradient id="coneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4A843"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Cone -->
+  <path d="M100 165 L70 95 Q100 90 130 95 Z" fill="url(#coneGrad)" stroke="#B8860B" stroke-width="1.5"/>
+  <path d="M70 95 L130 95" stroke="#B8860B" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+  
+  <!-- Gelato Scoops (3 flavors: Pistachio, Stracciatella, Amarena) -->
+  <!-- Bottom scoop - Pistachio -->
+  <circle cx="100" cy="105" r="32" fill="#8FD4A8" filter="url(#glow)"/>
+  <ellipse cx="90" cy="98" rx="8" ry="5" fill="#7BC498" opacity="0.6"/>
+  
+  <!-- Middle scoop - Stracciatella (cream with chocolate chips) -->
+  <circle cx="100" cy="60" r="30" fill="#FFF8F0" filter="url(#glow)"/>
+  <circle cx="92" cy="55" r="2.5" fill="#4A3428"/>
+  <circle cx="108" cy="52" r="2" fill="#4A3428"/>
+  <circle cx="95" cy="70" r="1.5" fill="#4A3428"/>
+  <circle cx="110" cy="68" r="2" fill="#4A3428"/>
+  <circle cx="88" cy="65" r="1.8" fill="#4A3428"/>
+  
+  <!-- Top scoop - Amarena (cherry red) -->
+  <circle cx="100" cy="20" r="28" fill="#E86C4A" filter="url(#glow)"/>
+  <ellipse cx="92" cy="14" rx="7" ry="4" fill="#D4A843" opacity="0.3"/>
+  <circle cx="95" cy="12" r="3" fill="#8B2E1A"/>
+  <circle cx="112" cy="18" r="2.5" fill="#8B2E1A"/>
+  
+  <!-- Drip effect -->
+  <path d="M115 50 Q120 70 118 85" stroke="#E86C4A" stroke-width="4" fill="none" opacity="0.7" stroke-linecap="round"/>
+  
+  <!-- Italian flag accent dots -->
+  <circle cx="55" cy="110" r="4" fill="#009246"/>
+  <circle cx="55" cy="120" r="4" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.5"/>
+  <circle cx="55" cy="130" r="4" fill="#CE2B37"/>
+  
+  <!-- "Venezia" text -->
+  <text x="100" y="185" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#2D1F16" letter-spacing="1">Venezia</text>
+  <text x="100" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#4A3428" letter-spacing="2">Gelato Italiano</text>
+</svg>
