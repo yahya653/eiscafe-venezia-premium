@@ -1,0 +1,174 @@
+---
+import { siteConfig } from '../content/site.ts';
+
+interface Props {
+  lang?: 'de' | 'en' | 'it';
+}
+const { lang = 'de' } = Astro.props;
+
+const t = {
+  de: {
+    rights: 'Alle Rechte vorbehalten.',
+    developed: 'Entwickelt mit ❤️ für Eiscafe Venezia',
+    imprint: 'Impressum',
+    privacy: 'Datenschutz',
+    cookieSettings: 'Cookie-Einstellungen',
+    followUs: 'Folgen Sie uns',
+    newsletter: 'Newsletter',
+    newsletterDesc: 'Keine saisonalen Sorten verpassen.',
+    emailPlaceholder: 'Ihre E-Mail',
+    subscribe: 'Abonnieren',
+    quickLinks: 'Schnelllinks',
+    contact: 'Kontakt',
+  },
+  en: {
+    rights: 'All rights reserved.',
+    developed: 'Developed with ❤️ for Eiscafe Venezia',
+    imprint: 'Imprint',
+    privacy: 'Privacy',
+    cookieSettings: 'Cookie Settings',
+    followUs: 'Follow Us',
+    newsletter: 'Newsletter',
+    newsletterDesc: 'Never miss seasonal flavors.',
+    emailPlaceholder: 'Your Email',
+    subscribe: 'Subscribe',
+    quickLinks: 'Quick Links',
+    contact: 'Contact',
+  },
+  it: {
+    rights: 'Tutti i diritti riservati.',
+    developed: 'Sviluppato con ❤️ per Eiscafe Venezia',
+    imprint: 'Impressum',
+    privacy: 'Privacy',
+    cookieSettings: 'Impostazioni Cookie',
+    followUs: 'Seguici',
+    newsletter: 'Newsletter',
+    newsletterDesc: 'Non perdere i gusti stagionali.',
+    emailPlaceholder: 'La Tua Email',
+    subscribe: 'Iscriviti',
+    quickLinks: 'Link Rapidi',
+    contact: 'Contatto',
+  },
+}[lang];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-venezia-darkChocolate text-venezia-cream" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+
+  <div class="container-fluid py-fluid-16 lg:py-fluid-24">
+    <div class="grid lg:grid-cols-5 gap-fluid-10 mb-fluid-16">
+      <div class="lg:col-span-2 reveal" data-reveal>
+        <a href="/" class="flex items-center gap-2 mb-fluid-6" aria-label={`${siteConfig.name} - Startseite`}>
+          <svg class="h-10 w-10 text-accent" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M16 8C12.686 8 10 10.686 10 14c0 2.5 4 8 6 10s6-7.5 6-10c0-3.314-2.686-6-6-6z" fill="currentColor" />
+            <circle cx="16" cy="14" r="2" fill="#FFF8F0" />
+          </svg>
+          <span class="font-display text-fluid-2xl font-bold text-venezia-cream">{siteConfig.name}</span>
+        </a>
+        <p class="text-venezia-warm/80 text-fluid-base mb-fluid-6 max-w-xs text-pretty">
+          {siteConfig.description}
+        </p>
+        <p class="text-venezia-warm/60 text-fluid-sm">{t.developed}</p>
+
+        <div class="mt-fluid-8 flex gap-4">
+          <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="h-10 w-10 rounded-xl bg-venezia-chocolate/50 flex items-center justify-center text-venezia-warm hover:text-accent hover:bg-accent/20 transition-all duration-300" aria-label="Instagram">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" class="h-10 w-10 rounded-xl bg-venezia-chocolate/50 flex items-center justify-center text-venezia-warm hover:text-accent hover:bg-accent/20 transition-all duration-300" aria-label="Facebook">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href={siteConfig.social.googleMaps} target="_blank" rel="noopener noreferrer" class="h-10 w-10 rounded-xl bg-venezia-chocolate/50 flex items-center justify-center text-venezia-warm hover:text-accent hover:bg-accent/20 transition-all duration-300" aria-label="Google Maps">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal stagger-1" data-reveal style="transition-delay: 100ms">
+        <h3 class="font-display text-fluid-lg font-bold text-venezia-cream mb-fluid-4">{t.quickLinks}</h3>
+        <nav aria-label={t.quickLinks}>
+          <ul class="space-y-3">
+            <li><a href="#speisekarte" class="text-venezia-warm/80 hover:text-accent transition-colors text-fluid-sm">Speisekarte</a></li>
+            <li><a href="#ueber-uns" class="text-venezia-warm/80 hover:text-accent transition-colors text-fluid-sm">Über uns</a></li>
+            <li><a href="#standort" class="text-venezia-warm/80 hover:text-accent transition-colors text-fluid-sm">Standort & Öffnungszeiten</a></li>
+            <li><a href="#kontakt" class="text-venezia-warm/80 hover:text-accent transition-colors text-fluid-sm">Kontakt & Reservierung</a></li>
+            <li><a href="/speisekarte" class="text-venezia-warm/80 hover:text-accent transition-colors text-fluid-sm">Vollständige Speisekarte</a></li>
+            <li><a href="/events" class="text-venezia-warm/80 hover:text-accent transition-colors text-fluid-sm">Veranstaltungen & Catering</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="reveal stagger-2" data-reveal style="transition-delay: 200ms">
+        <h3 class="font-display text-fluid-lg font-bold text-venezia-cream mb-fluid-4">{t.contact}</h3>
+        <address class="not-italic text-venezia-warm/80 space-y-2 text-fluid-sm">
+          <p class="font-medium text-venezia-cream">{siteConfig.location.name}</p>
+          <p>{siteConfig.location.street}</p>
+          <p>{siteConfig.location.postalCode} {siteConfig.location.city}</p>
+          <p>{siteConfig.location.country}</p>
+          <div class="pt-2 border-t border-venezia-chocolate/30 space-y-2">
+            <a href={`tel:${siteConfig.location.phone}`} class="flex items-center gap-2 hover:text-accent transition-colors">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              {siteConfig.location.phone.replace('+49 ', '0')}
+            </a>
+            <a href={`mailto:${siteConfig.location.email}`} class="flex items-center gap-2 hover:text-accent transition-colors">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              {siteConfig.location.email}
+            </a>
+          </div>
+        </address>
+      </div>
+
+      <div class="reveal stagger-3" data-reveal style="transition-delay: 300ms">
+        <h3 class="font-display text-fluid-lg font-bold text-venezia-cream mb-fluid-4">{t.newsletter}</h3>
+        <p class="text-venezia-warm/70 text-fluid-sm mb-4">{t.newsletterDesc}</p>
+        <form class="flex flex-col gap-2" action="/api/newsletter" method="POST">
+          <label for="footer-email" class="sr-only">{t.emailPlaceholder}</label>
+          <input type="email" id="footer-email" name="email" placeholder={t.emailPlaceholder} required class="input bg-venezia-chocolate/50 border-venezia-chocolate/30 text-venezia-cream placeholder:text-venezia-warm/50 focus:border-accent focus:ring-accent/20" />
+          <button type="submit" class="btn-primary text-fluid-sm">{t.subscribe}</button>
+          <p class="text-fluid-xs text-venezia-warm/50 text-center">Kein Spam. Jederzeit abbestellbar.</p>
+        </form>
+      </div>
+    </div>
+
+    <div class="border-t border-venezia-chocolate/30 pt-fluid-8 reveal" data-reveal>
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+        <p class="text-venezia-warm/60 text-fluid-sm text-center lg:text-left">
+          © {currentYear} {siteConfig.name}. {t.rights}
+        </p>
+        <nav class="flex flex-wrap items-center justify-center gap-4" aria-label="Rechtliche Links">
+          <a href="/impressum" class="text-venezia-warm/60 hover:text-accent transition-colors text-fluid-sm">{t.imprint}</a>
+          <span class="text-venezia-chocolate/30">|</span>
+          <a href="/datenschutz" class="text-venezia-warm/60 hover:text-accent transition-colors text-fluid-sm">{t.privacy}</a>
+          <span class="text-venezia-chocolate/30">|</span>
+          <button id="cookie-settings" class="text-venezia-warm/60 hover:text-accent transition-colors text-fluid-sm bg-none border-none p-0 cursor-pointer">{t.cookieSettings}</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+  // Cookie settings button
+  const cookieBtn = document.getElementById('cookie-settings');
+  cookieBtn?.addEventListener('click', () => {
+    // Trigger cookie consent banner re-open
+    const event = new CustomEvent('cookie:open-settings');
+    window.dispatchEvent(event);
+  });
+</script>

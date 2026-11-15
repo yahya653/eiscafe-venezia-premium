@@ -1,0 +1,263 @@
+---
+import { siteConfig } from '../content/site.ts';
+
+interface Props {
+  lang?: 'de' | 'en' | 'it';
+}
+const { lang = 'de' } = Astro.props;
+
+const t = {
+  de: {
+    title: 'Besuchen Sie uns',
+    subtitle: 'Im Herzen von Magstadt — mit Parkplätzen und Sonnenterrasse.',
+    address: 'Adresse',
+    hours: 'Öffnungszeiten',
+    contact: 'Kontakt',
+    amenities: 'Ausstattung',
+    getDirections: 'Route planen',
+    callUs: 'Anrufen',
+    emailUs: 'E-Mail schreiben',
+    openNow: 'Geöffnet',
+    closedNow: 'Geschlossen',
+    opensAt: 'Öffnet um',
+    today: 'Heute',
+    monday: 'Montag',
+    tuesday: 'Dienstag',
+    wednesday: 'Mittwoch',
+    thursday: 'Donnerstag',
+    friday: 'Freitag',
+    saturday: 'Samstag',
+    sunday: 'Sonntag',
+  },
+  en: {
+    title: 'Visit Us',
+    subtitle: 'In the heart of Magstadt — with parking and sun terrace.',
+    address: 'Address',
+    hours: 'Opening Hours',
+    contact: 'Contact',
+    amenities: 'Amenities',
+    getDirections: 'Get Directions',
+    callUs: 'Call Us',
+    emailUs: 'Write Email',
+    openNow: 'Open',
+    closedNow: 'Closed',
+    opensAt: 'Opens at',
+    today: 'Today',
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    saturday: 'Saturday',
+    sunday: 'Sunday',
+  },
+  it: {
+    title: 'Venite a Trovarci',
+    subtitle: 'Nel cuore di Magstadt — con parcheggio e terrazza soleggiata.',
+    address: 'Indirizzo',
+    hours: 'Orari di Apertura',
+    contact: 'Contatto',
+    amenities: 'Servizi',
+    getDirections: 'Indicazioni',
+    callUs: 'Chiamaci',
+    emailUs: 'Scrivi Email',
+    openNow: 'Aperto',
+    closedNow: 'Chiuso',
+    opensAt: 'Apre alle',
+    today: 'Oggi',
+    monday: 'Lunedì',
+    tuesday: 'Martedì',
+    wednesday: 'Mercoledì',
+    thursday: 'Giovedì',
+    friday: 'Venerdì',
+    saturday: 'Sabato',
+    sunday: 'Domenica',
+  },
+}[lang];
+
+const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const dayNames = {
+  de: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  it: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+}[lang];
+
+const now = new Date();
+const currentDay = days[now.getDay()];
+const currentTime = now.getHours() * 60 + now.getMinutes();
+const todayHours = siteConfig.hours[currentDay as keyof typeof siteConfig.hours];
+const isOpen = todayHours && !todayHours.closed && currentTime >= parseTime(todayHours.open) && currentTime < parseTime(todayHours.close);
+
+function parseTime(time: string): number {
+  const [h, m] = time.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function formatTime(time: string): string {
+  return time.slice(0, 5);
+}
+---
+
+<section id="standort" class="section bg-background" aria-labelledby="location-heading">
+  <div class="container-fluid">
+    <header class="text-center max-w-3xl mx-auto mb-fluid-12 reveal" data-reveal>
+      <span class="badge-primary mb-fluid-4 inline-block">📍 {t.subtitle}</span>
+      <h2 id="location-heading" class="font-display text-fluid-3xl lg:text-fluid-4xl font-bold text-foreground mb-fluid-4">
+        {t.title}
+      </h2>
+    </header>
+
+    <div class="grid lg:grid-cols-3 gap-fluid-8">
+      <div class="lg:col-span-2 reveal" data-reveal>
+        <div class="aspect-video rounded-2xl overflow-hidden shadow-card bg-muted relative">
+          <iframe
+            title="Standort Eiscafe Venezia Magstadt"
+            src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2657.8!2d8.9623198!3d48.7414896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799b8c7c7c7c7c7%3A0xc7c7c7c7c7c7c7c7!2sMaichinger%20Str.%2010%2C%2071106%20Magstadt!5e0!3m2!1sde!2sde!4v1234567890`}
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="w-full h-full"
+          ></iframe>
+          <div class="absolute bottom-4 left-4 right-4 bg-card/95 backdrop-blur rounded-xl p-4 shadow-card">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-fluid-sm">
+              <address class="not-italic font-medium text-foreground">
+                {siteConfig.location.street}, {siteConfig.location.postalCode} {siteConfig.location.city}
+              </address>
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(`${siteConfig.location.street}, ${siteConfig.location.postalCode} ${siteConfig.location.city}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary text-fluid-xs px-fluid-4 py-fluid-2 whitespace-nowrap"
+              >
+                {t.getDirections}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6 reveal" data-reveal>
+        <div class="card p-fluid-6">
+          <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
+            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            {t.address}
+          </h3>
+          <address class="not-italic text-muted-foreground space-y-1">
+            <p class="font-medium text-foreground">{siteConfig.location.name}</p>
+            <p>{siteConfig.location.street}</p>
+            <p>{siteConfig.location.postalCode} {siteConfig.location.city}</p>
+            <p>{siteConfig.location.country}</p>
+          </address>
+        </div>
+
+        <div class="card p-fluid-6">
+          <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
+            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {t.hours}
+          </h3>
+          <dl class="space-y-2 text-fluid-sm">
+            {Object.entries(siteConfig.hours).map(([day, hours]) => {
+              const isToday = day === currentDay;
+              const dayIndex = days.indexOf(day);
+              const displayName = dayNames[dayIndex];
+              if (!hours || hours.closed) {
+                return (
+                  <div class="flex justify-between items-center py-1 {isToday ? 'bg-accent/10 rounded-lg px-2' : ''}" data-day={day}>
+                    <dt class="font-medium {isToday ? 'text-accent' : 'text-foreground'}">{displayName}{isToday ? ` (${t.today})` : ''}</dt>
+                    <dd class="text-muted-foreground">Geschlossen</dd>
+                  </div>
+                );
+              }
+              const open = formatTime(hours.open);
+              const close = formatTime(hours.close);
+              const dayOpen = currentTime >= parseTime(hours.open) && currentTime < parseTime(hours.close);
+              return (
+                <div class="flex justify-between items-center py-1 {isToday ? 'bg-accent/10 rounded-lg px-2' : ''}" data-day={day}>
+                  <dt class="font-medium {isToday ? 'text-accent' : 'text-foreground'}">{displayName}{isToday ? ` (${t.today})` : ''}</dt>
+                  <dd class="flex items-center gap-2">
+                    <span class="{dayOpen ? 'text-green-600' : 'text-muted-foreground'}">{open} – {close}</span>
+                    {isToday && (
+                      <span class="badge {dayOpen ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
+                        {dayOpen ? t.openNow : t.closedNow}
+                      </span>
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+
+        <div class="card p-fluid-6">
+          <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
+            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            {t.contact}
+          </h3>
+          <div class="space-y-3 text-fluid-sm">
+            <a href={`tel:${siteConfig.location.phone}`} class="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group">
+              <div class="h-10 w-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-foreground font-medium">{siteConfig.location.phone.replace('+49 ', '0')}</p>
+                <p class="text-fluid-xs text-muted-foreground">{t.callUs}</p>
+              </div>
+            </a>
+            <a href={`mailto:${siteConfig.location.email}`} class="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group">
+              <div class="h-10 w-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-foreground font-medium">{siteConfig.location.email}</p>
+                <p class="text-fluid-xs text-muted-foreground">{t.emailUs}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="card p-fluid-6">
+          <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
+            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+            {t.amenities}
+          </h3>
+          <ul class="grid sm:grid-cols-2 gap-3">
+            {siteConfig.amenities.map(amenity => (
+              <li class="flex items-center gap-3 text-fluid-sm">
+                <div class="h-8 w-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
+                  {(() => {
+                    switch (amenity.icon) {
+                      case 'sun': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>;
+                      case 'users': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+                      case 'package': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M15.5 3.5a2 2 0 0 1 0 2.83"/><path d="M16 7h5.5"/><path d="M16 11h5.5"/><path d="M16 15h5.5"/></svg>;
+                      case 'dog': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a6 6 0 0 0-6 6v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a6 6 0 0 0-6-6z"/><path d="M9 10a1 1 0 0 1 2 0 1 1 0 0 1-2 0z"/><path d="M15 10a1 1 0 0 1 2 0 1 1 0 0 1-2 0z"/><path d="M12 16v2"/></svg>;
+                      case 'wifi': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>;
+                      case 'car': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.3-1.4.7l-1.1 1.1C1.6 8.7 1 9.6 1 10.5V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>;
+                    }
+                  })()}
+                </div>
+                <span class="text-muted-foreground">{amenity.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

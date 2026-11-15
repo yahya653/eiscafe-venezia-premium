@@ -1,0 +1,289 @@
+---
+interface Props {
+  lang?: 'de' | 'en' | 'it';
+}
+const { lang = 'de' } = Astro.props;
+const site = (await import('../content/site.ts')).siteConfig;
+const t = {
+  de: {
+    headline: 'Eis wie in Bologna.',
+    subheadline: 'Seit 1987 handgemacht in Magstadt. Keine Kompromisse. Nur die besten Zutaten.',
+    cta: 'Speisekarte entdecken',
+    ctaSecondary: 'Unsere Geschichte',
+    scrollHint: 'Nach unten scrollen',
+  },
+  en: {
+    headline: 'Ice cream like in Bologna.',
+    subheadline: 'Handcrafted in Magstadt since 1987. No compromises. Only the finest ingredients.',
+    cta: 'Discover Menu',
+    ctaSecondary: 'Our Story',
+    scrollHint: 'Scroll down',
+  },
+  it: {
+    headline: 'Gelato come a Bologna.',
+    subheadline: 'Fatto a mano a Magstadt dal 1987. Nessun compromesso. Solo i migliori ingredienti.',
+    cta: 'Scopri il Menu',
+    ctaSecondary: 'La Nostra Storia',
+    scrollHint: 'Scorri in basso',
+  },
+}[lang];
+---
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden" aria-labelledby="hero-heading">
+  <div id="webgl-canvas" class="absolute inset-0 -z-10" aria-hidden="true"></div>
+
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-venezia-cream/50 to-venezia-cream" aria-hidden="true"></div>
+
+  <div class="relative container-fluid z-10 pt-20 lg:pt-28 pb-fluid-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="reveal stagger-1" data-reveal>
+        <span class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-fluid-4 py-fluid-2 text-fluid-sm font-medium text-accent border border-accent/20 mb-fluid-6">
+          <span class="relative h-2 w-2 rounded-full bg-accent animate-pulse" aria-hidden="true"></span>
+          {site.tagline}
+        </span>
+      </div>
+
+      <h1 id="hero-heading" class="font-display text-fluid-4xl lg:text-fluid-5xl xl:text-fluid-6xl font-bold tracking-tight text-foreground mb-fluid-6 reveal stagger-2" data-reveal>
+        <span class="block text-gradient-venezia">{t.headline}</span>
+      </h1>
+
+      <p class="text-fluid-lg lg:text-fluid-xl text-muted-foreground max-w-2xl mx-auto mb-fluid-10 reveal stagger-3" data-reveal>
+        {t.subheadline}
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal stagger-4" data-reveal>
+        <a href="#speisekarte" class="btn-primary text-fluid-base px-fluid-8 py-fluid-4 w-full sm:w-auto">
+          {t.cta}
+          <svg class="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <a href="#ueber-uns" class="btn-outline text-fluid-base px-fluid-8 py-fluid-4 w-full sm:w-auto">
+          {t.ctaSecondary}
+        </a>
+      </div>
+
+      <div class="mt-fluid-16 reveal stagger-5" data-reveal>
+        <div class="flex items-center justify-center gap-fluid-10 text-fluid-sm text-muted-foreground">
+          <div class="flex flex-col items-center gap-1">
+            <div class="font-display text-fluid-3xl font-bold text-accent">1987</div>
+            <span>Gegründet</span>
+          </div>
+          <div class="w-px h-8 bg-border"></div>
+          <div class="flex flex-col items-center gap-1">
+            <div class="font-display text-fluid-3xl font-bold text-accent">38+</div>
+            <span>Sorten</span>
+          </div>
+          <div class="w-px h-8 bg-border"></div>
+          <div class="flex flex-col items-center gap-1">
+            <div class="font-display text-fluid-3xl font-bold text-accent">4.7★</div>
+            <span>Bewertung</span>
+          </div>
+          <div class="w-px h-8 bg-border"></div>
+          <div class="flex flex-col items-center gap-1">
+            <div class="font-display text-fluid-3xl font-bold text-accent">100%</div>
+            <span>Handgemacht</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-fluid-8 left-1/2 -translate-x-1/2 reveal stagger-6 animate-bounce" data-reveal aria-hidden="true">
+      <svg class="h-8 w-8 text-foreground/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="sr-only">{t.scrollHint}</span>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Three.js WebGL Hero Background
+  (async () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.HTMLCanvasElement) return;
+
+    const { default: Three } = await import('three');
+    const canvasContainer = document.getElementById('webgl-canvas');
+    if (!canvasContainer) return;
+
+    // Scene setup
+    const scene = new Three.Scene();
+    const camera = new Three.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 30);
+
+    const renderer = new Three.WebGLRenderer({
+      canvas: document.createElement('canvas'),
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+    renderer.setClearColor(0x000000, 0);
+    canvasContainer.appendChild(renderer.domElement);
+
+    // Cream-colored particles floating like ice cream
+    const particleCount = 800;
+    const geometry = new Three.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+    const colors = new Float32Array(particleCount * 3);
+    const velocities = new Float32Array(particleCount * 3);
+    const phases = new Float32Array(particleCount);
+
+    const palette = [
+      new Three.Color(0xFFE8D0), // warm
+      new Three.Color(0xFFD4B8), // peach
+      new Three.Color(0xFF9F7A), // coral
+      new Three.Color(0xFFF8F0), // cream
+      new Three.Color(0xA8E6CF), // mint
+    ];
+
+    for (let i = 0; i < particleCount; i++) {
+      const radius = 10 + Math.random() * 20;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = radius * Math.cos(phi);
+
+      sizes[i] = 0.08 + Math.random() * 0.25;
+
+      const color = palette[Math.floor(Math.random() * palette.length)];
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+
+      velocities[i * 3] = (Math.random() - 0.5) * 0.002;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.002;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.002;
+
+      phases[i] = Math.random() * Math.PI * 2;
+    }
+
+    geometry.setAttribute('position', new Three.BufferAttribute(positions, 3));
+    geometry.setAttribute('size', new Three.BufferAttribute(sizes, 1));
+    geometry.setAttribute('color', new Three.BufferAttribute(colors, 3));
+    geometry.setAttribute('velocity', new Three.BufferAttribute(velocities, 3));
+    geometry.setAttribute('phase', new Three.BufferAttribute(phases, 1));
+
+    const material = new Three.PointsMaterial({
+      size: 1,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.6,
+      sizeAttenuation: true,
+      blending: Three.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const particles = new Three.Points(geometry, material);
+    scene.add(particles);
+
+    // Soft ambient light
+    const ambientLight = new Three.AmbientLight(0xFFF8F0, 0.5);
+    scene.add(ambientLight);
+
+    const pointLight = new Three.PointLight(0xFF9F7A, 0.3, 50);
+    pointLight.position.set(10, 10, 10);
+    scene.add(pointLight);
+
+    // Mouse interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    }, { passive: true });
+
+    // Touch support
+    document.addEventListener('touchmove', (e) => {
+      if (e.touches[0]) {
+        mouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+      }
+    }, { passive: true });
+
+    // Scroll parallax
+    let scrollY = 0;
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+    }, { passive: true });
+
+    // Animation loop
+    let frame = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      frame++;
+
+      // Smooth mouse follow
+      targetX += (mouseX - targetX) * 0.02;
+      targetY += (mouseY - targetY) * 0.02;
+
+      // Camera gentle drift
+      camera.position.x += (targetX * 2 - camera.position.x) * 0.01;
+      camera.position.y += (targetY * 2 - camera.position.y) * 0.01;
+      camera.lookAt(0, 0, 0);
+
+      // Particle animation
+      const pos = geometry.attributes.position;
+      const vel = geometry.attributes.velocity;
+      const ph = geometry.attributes.phase;
+
+      for (let i = 0; i < particleCount; i++) {
+        const t = frame * 0.001 + ph.array[i];
+
+        // Gentle orbital motion
+        pos.array[i * 3] += vel.array[i * 3] + Math.sin(t) * 0.001;
+        pos.array[i * 3 + 1] += vel.array[i * 3 + 1] + Math.cos(t) * 0.001;
+        pos.array[i * 3 + 2] += vel.array[i * 3 + 2] + Math.sin(t * 0.7) * 0.0005;
+
+        // Boundary wrap
+        const dist = Math.sqrt(
+          pos.array[i * 3] ** 2 +
+          pos.array[i * 3 + 1] ** 2 +
+          pos.array[i * 3 + 2] ** 2
+        );
+        if (dist > 35) {
+          const radius = 10 + Math.random() * 15;
+          const theta = Math.random() * Math.PI * 2;
+          const phi = Math.acos(2 * Math.random() - 1);
+          pos.array[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+          pos.array[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+          pos.array[i * 3 + 2] = radius * Math.cos(phi);
+        }
+      }
+      pos.needsUpdate = true;
+
+      // Subtle rotation of entire system
+      particles.rotation.y += 0.00005;
+      particles.rotation.x += 0.00002;
+
+      // Scroll parallax on particles
+      particles.position.y = -scrollY * 0.01;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+    });
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+    });
+  })();
+</script>

@@ -1,0 +1,111 @@
+---
+interface Props {
+  flavor: import('../content/flavors.ts').Flavor;
+  lang?: 'de' | 'en' | 'it';
+  index?: number;
+}
+const { flavor, lang = 'de', index = 0 } = Astro.props;
+const t = {
+  de: {
+    single: 'Einfach',
+    double: 'Doppelt',
+    triple: 'Dreifach',
+    allergens: 'Allergene:',
+    featured: 'Empfehlung',
+    vegan: 'Vegan',
+    seasonal: 'Saisonal',
+  },
+  en: {
+    single: 'Single',
+    double: 'Double',
+    triple: 'Triple',
+    allergens: 'Allergens:',
+    featured: 'Featured',
+    vegan: 'Vegan',
+    seasonal: 'Seasonal',
+  },
+  it: {
+    single: 'Singolo',
+    double: 'Doppio',
+    triple: 'Triplo',
+    allergens: 'Allergeni:',
+    featured: 'Consigliato',
+    vegan: 'Vegano',
+    seasonal: 'Stagionale',
+  },
+}[lang];
+---
+<article
+  class="card-interactive group relative overflow-hidden"
+  data-flavor-id={flavor.id}
+  data-reveal
+  style="transition-delay: {index * 100}ms"
+>
+  <div class="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+
+  <div class="relative aspect-square overflow-hidden rounded-xl mb-fluid-4">
+    <div class="absolute inset-0 bg-gradient-to-br from-venezia-warm via-venezia-peach to-venezia-mint opacity-0 group-hover:opacity-100 transition-opacity duration-700" aria-hidden="true"></div>
+    <img
+      src={flavor.image}
+      alt=""
+      class="w-full h-full object-cover transition-transform duration-700 ease-expo-out group-hover:scale-105"
+      loading="lazy"
+      width="400"
+      height="400"
+      onerror="this.src='/images/flavors/placeholder.webp'; this.onerror=null;"
+    />
+    {flavor.featured && (
+      <span class="absolute top-3 left-3 badge-primary animate-slide-up">
+        {t.featured}
+      </span>
+    )}
+    {flavor.category === 'vegan' && (
+      <span class="absolute top-3 right-3 badge bg-venezia-mint/20 text-venezia-pistachio border-venezia-mint/30">
+        {t.vegan} 🌱
+      </span>
+    )}
+    {flavor.category === 'seasonal' && (
+      <span class="absolute top-3 right-3 badge bg-venezia-coral/20 text-venezia-deepCoral border-venezia-coral/30">
+        {t.seasonal} 🍂
+      </span>
+    )}
+  </div>
+
+  <div class="relative z-10">
+    <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-2 group-hover:text-accent transition-colors duration-300">
+      {flavor.name}
+    </h3>
+
+    <p class="text-fluid-sm text-muted-foreground mb-fluid-4 line-clamp-2 text-pretty">
+      {flavor.description}
+    </p>
+
+    <div class="flex flex-wrap items-center gap-2 mb-fluid-4">
+      <span class="badge-secondary">
+        €{flavor.price.single.toFixed(2)} / {t.single}
+      </span>
+      <span class="badge-secondary">
+        €{flavor.price.double.toFixed(2)} / {t.double}
+      </span>
+      <span class="badge-secondary">
+        €{flavor.price.triple.toFixed(2)} / {t.triple}
+      </span>
+    </div>
+
+    <details class="group/allergens">
+      <summary class="flex items-center gap-1.5 text-fluid-xs font-medium text-muted-foreground hover:text-accent transition-colors cursor-pointer list-none">
+        <svg class="h-4 w-4 transition-transform duration-300 group-open/allergens:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+        {t.allergens}
+      </summary>
+      <div class="mt-fluid-2 pt-fluid-2 border-t border-border animate-fade-in">
+        <ul class="flex flex-wrap gap-1.5 text-fluid-xs text-muted-foreground">
+          {flavor.allergens.map(allergen => (
+            <li class="badge bg-muted text-muted-foreground">{allergen}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</article>

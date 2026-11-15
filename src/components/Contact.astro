@@ -1,0 +1,247 @@
+---
+import { siteConfig } from '../content/site.ts';
+
+interface Props {
+  lang?: 'de' | 'en' | 'it';
+}
+const { lang = 'de' } = Astro.props;
+
+const t = {
+  de: {
+    title: 'Kontakt & Reservierung',
+    subtitle: 'Haben Sie Fragen? Möchten Sie einen Tisch reservieren oder unsere Räume für eine Veranstaltung buchen?',
+    name: 'Ihr Name',
+    email: 'E-Mail-Adresse',
+    phone: 'Telefon (optional)',
+    subject: 'Betreff',
+    message: 'Ihre Nachricht',
+    send: 'Nachricht senden',
+    sending: 'Wird gesendet...',
+    success: 'Vielen Dank! Ihre Nachricht wurde gesendet.',
+    error: 'Fehler beim Senden. Bitte versuchen Sie es später erneut.',
+    subjects: [
+      { value: 'general', label: 'Allgemeine Anfrage' },
+      { value: 'reservation', label: 'Tischreservierung' },
+      { value: 'event', label: 'Veranstaltungsbuchung' },
+      { value: 'catering', label: 'Catering-Anfrage' },
+      { value: 'feedback', label: 'Feedback & Lob' },
+      { value: 'other', label: 'Sonstiges' },
+    ],
+    privacy: 'Ich habe die <a href="/datenschutz" class="underline hover:text-accent">Datenschutzerklärung</a> gelesen und stimme zu.',
+    required: 'Pflichtfeld',
+  },
+  en: {
+    title: 'Contact & Reservations',
+    subtitle: 'Have questions? Want to reserve a table or book our venue for an event?',
+    name: 'Your Name',
+    email: 'Email Address',
+    phone: 'Phone (optional)',
+    subject: 'Subject',
+    message: 'Your Message',
+    send: 'Send Message',
+    sending: 'Sending...',
+    success: 'Thank you! Your message has been sent.',
+    error: 'Error sending. Please try again later.',
+    subjects: [
+      { value: 'general', label: 'General Inquiry' },
+      { value: 'reservation', label: 'Table Reservation' },
+      { value: 'event', label: 'Event Booking' },
+      { value: 'catering', label: 'Catering Inquiry' },
+      { value: 'feedback', label: 'Feedback & Praise' },
+      { value: 'other', label: 'Other' },
+    ],
+    privacy: 'I have read the <a href="/privacy" class="underline hover:text-accent">Privacy Policy</a> and agree.',
+    required: 'Required',
+  },
+  it: {
+    title: 'Contatto & Prenotazioni',
+    subtitle: 'Hai domande? Vuoi prenotare un tavolo o prenotare la nostra location per un evento?',
+    name: 'Il Tuo Nome',
+    email: 'Indirizzo Email',
+    phone: 'Telefono (opzionale)',
+    subject: 'Oggetto',
+    message: 'Il Tuo Messaggio',
+    send: 'Invia Messaggio',
+    sending: 'Invio in corso...',
+    success: 'Grazie! Il tuo messaggio è stato inviato.',
+    error: 'Errore durante l\'invio. Riprova più tardi.',
+    subjects: [
+      { value: 'general', label: 'Richiesta Generale' },
+      { value: 'reservation', label: 'Prenotazione Tavolo' },
+      { value: 'event', label: 'Prenotazione Evento' },
+      { value: 'catering', label: 'Richiesta Catering' },
+      { value: 'feedback', label: 'Feedback & Elogi' },
+      { value: 'other', label: 'Altro' },
+    ],
+    privacy: 'Ho letto l\'<a href="/privacy" class="underline hover:text-accent">Informativa sulla Privacy</a> e accetto.',
+    required: 'Campo Obbligatorio',
+  },
+}[lang];
+---
+
+<section id="kontakt" class="section bg-venezia-cream/30" aria-labelledby="contact-heading">
+  <div class="container-fluid">
+    <header class="text-center max-w-3xl mx-auto mb-fluid-12 reveal" data-reveal>
+      <span class="badge-primary mb-fluid-4 inline-block">✉️ {t.subtitle}</span>
+      <h2 id="contact-heading" class="font-display text-fluid-3xl lg:text-fluid-4xl font-bold text-foreground mb-fluid-4">
+        {t.title}
+      </h2>
+    </header>
+
+    <div class="grid lg:grid-cols-2 gap-fluid-12">
+      <div class="reveal" data-reveal>
+        <h3 class="font-display text-fluid-2xl font-bold text-foreground mb-fluid-6">Direkt kontaktieren</h3>
+        <div class="space-y-6">
+          <a href={`tel:${siteConfig.location.phone}`} class="flex items-center gap-4 p-fluid-4 card group">
+            <div class="h-12 w-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-medium text-foreground">{siteConfig.location.phone.replace('+49 ', '0')}</p>
+              <p class="text-fluid-sm text-muted-foreground">Mo–Sa 10–22 Uhr, So 11–22 Uhr</p>
+            </div>
+          </a>
+          <a href={`mailto:${siteConfig.location.email}`} class="flex items-center gap-4 p-fluid-4 card group">
+            <div class="h-12 w-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-medium text-foreground">{siteConfig.location.email}</p>
+              <p class="text-fluid-sm text-muted-foreground">Antwort meist innerhalb 24h</p>
+            </div>
+          </a>
+          <a href={`https://maps.google.com/?q=${encodeURIComponent(`${siteConfig.location.street}, ${siteConfig.location.postalCode} ${siteConfig.location.city}`)}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-fluid-4 card group">
+            <div class="h-12 w-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-medium text-foreground">{siteConfig.location.street}, {siteConfig.location.postalCode} {siteConfig.location.city}</p>
+              <p class="text-fluid-sm text-muted-foreground">Route planen →</p>
+            </div>
+          </a>
+        </div>
+
+        <h3 class="font-display text-fluid-2xl font-bold text-foreground mt-fluid-12 mb-fluid-6">Folgen Sie uns</h3>
+        <div class="flex gap-4">
+          <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="h-12 w-12 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent hover:bg-accent/5 transition-all duration-300" aria-label="Instagram">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" class="h-12 w-12 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent hover:bg-accent/5 transition-all duration-300" aria-label="Facebook">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href={siteConfig.social.googleMaps} target="_blank" rel="noopener noreferrer" class="h-12 w-12 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent hover:bg-accent/5 transition-all duration-300" aria-label="Google Maps">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal" data-reveal>
+        <form id="contact-form" class="card p-fluid-6 space-y-6" novalidate>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="sm:col-span-2">
+              <label for="name" class="label">{t.name} <span class="text-accent" aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" class="input" required aria-required="true" autocomplete="name" placeholder="Max Mustermann" />
+            </div>
+            <div>
+              <label for="email" class="label">{t.email} <span class="text-accent" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" class="input" required aria-required="true" autocomplete="email" placeholder="max@beispiel.de" />
+            </div>
+            <div>
+              <label for="phone" class="label">{t.phone}</label>
+              <input type="tel" id="phone" name="phone" class="input" autocomplete="tel" placeholder="+49 123 456789" />
+            </div>
+          </div>
+          <div>
+            <label for="subject" class="label">{t.subject} <span class="text-accent" aria-hidden="true">*</span></label>
+            <select id="subject" name="subject" class="input" required aria-required="true">
+              <option value="" disabled selected>Bitte wählen</option>
+              {t.subjects.map(s => <option value={s.value}>{s.label}</option>)}
+            </select>
+          </div>
+          <div>
+            <label for="message" class="label">{t.message} <span class="text-accent" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5" class="input resize-y" required aria-required="true" placeholder="Ihre Nachricht an uns..."></textarea>
+          </div>
+          <div>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" name="privacy" required class="mt-1 h-4 w-4 rounded border-border text-accent focus:ring-accent" aria-required="true" />
+              <span class="text-fluid-sm text-muted-foreground">{t.privacy}</span>
+            </label>
+          </div>
+          <button type="submit" class="btn-primary w-full sm:w-auto px-fluid-8 py-fluid-4 text-fluid-base">
+            <span data-btn-text>{t.send}</span>
+            <svg class="h-5 w-5 animate-spin hidden" data-btn-loading viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+              <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <p id="form-status" class="sr-only" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Contact form handling
+  const form = document.getElementById('contact-form');
+  const submitBtn = form?.querySelector('button[type="submit"]');
+  const btnText = submitBtn?.querySelector('[data-btn-text]');
+  const btnLoading = submitBtn?.querySelector('[data-btn-loading]');
+  const statusEl = document.getElementById('form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    submitBtn.disabled = true;
+    btnText?.classList.add('hidden');
+    btnLoading?.classList.remove('hidden');
+    statusEl.textContent = '';
+
+    try {
+      // In production, replace with actual endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        statusEl.textContent = '{t.success}';
+        form.reset();
+      } else {
+        throw new Error('Submit failed');
+      }
+    } catch {
+      statusEl.textContent = '{t.error}';
+    } finally {
+      submitBtn.disabled = false;
+      btnText?.classList.remove('hidden');
+      btnLoading?.classList.add('hidden');
+    }
+  });
+</script>

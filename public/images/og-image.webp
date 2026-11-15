@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#FFF8F0"/>
+  <rect width="1200" height="630" fill="url(#grad)"/>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFE8D0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFD4B8" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <circle cx="600" cy="315" r="200" stroke="#E86C4A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
+  <path d="M600 115C489.543 115 400 204.543 400 315c0 110.625 200 315 200 315s200-204.375 200-315c0-110.457-89.543-200-200-200z" fill="#E86C4A" opacity="0.15"/>
+  <circle cx="600" cy="315" r="40" fill="#FFF8F0" opacity="0.8"/>
+  <text x="600" y="280" text-anchor="middle" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="#2D1F16">Eiscafe Venezia</text>
+  <text x="600" y="350" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#4A3428">Magstadt • Seit 1987</text>
+  <text x="600" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#E86C4A" font-weight="600">Handgemachtes Eis • 38+ Sorten</text>
+  <circle cx="200" cy="100" r="60" fill="#E86C4A" opacity="0.1"/>
+  <circle cx="1000" cy="530" r="80" fill="#A8E6CF" opacity="0.1"/>
+</svg>

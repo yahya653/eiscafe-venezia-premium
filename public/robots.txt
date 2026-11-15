@@ -1,0 +1,14 @@
+# robots.txt for Eiscafe Venezia
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://eiscafe-venezia.de/sitemap-index.xml
+
+# Disallow admin/api paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl-delay for polite crawling
+Crawl-delay: 10

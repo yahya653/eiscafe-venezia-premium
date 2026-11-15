@@ -1,0 +1,132 @@
+---
+import FlavorCard from './FlavorCard.astro';
+import { flavors, categories, getFlavorsByCategory } from '../content/flavors.ts';
+
+interface Props {
+  lang?: 'de' | 'en' | 'it';
+}
+const { lang = 'de' } = Astro.props;
+
+const t = {
+  de: {
+    title: 'Unsere Eissorten',
+    subtitle: '38+ Sorten, täglich frisch hergestellt. Wählen Sie Ihre Favoriten.',
+    filterAll: 'Alle',
+    filterFeatured: 'Empfehlungen',
+    filterClassic: 'Klassiker',
+    filterSpecial: 'Spezialitäten',
+    filterVegan: 'Vegan',
+    filterSorbet: 'Sorbets',
+    filterSeasonal: 'Saisonal',
+    viewDetails: 'Details ansehen',
+    noFlavors: 'Keine Sorten in dieser Kategorie.',
+  },
+  en: {
+    title: 'Our Flavors',
+    subtitle: '38+ flavors, made fresh daily. Choose your favorites.',
+    filterAll: 'All',
+    filterFeatured: 'Featured',
+    filterClassic: 'Classics',
+    filterSpecial: 'Specialties',
+    filterVegan: 'Vegan',
+    filterSorbet: 'Sorbets',
+    filterSeasonal: 'Seasonal',
+    viewDetails: 'View Details',
+    noFlavors: 'No flavors in this category.',
+  },
+  it: {
+    title: 'I Nostri Gusti',
+    subtitle: '38+ gusti, fatti freschi ogni giorno. Scegli i tuoi preferiti.',
+    filterAll: 'Tutti',
+    filterFeatured: 'Consigliati',
+    filterClassic: 'Classici',
+    filterSpecial: 'Specialità',
+    filterVegan: 'Vegano',
+    filterSorbet: 'Sorbetti',
+    filterSeasonal: 'Stagionali',
+    viewDetails: 'Vedi Dettagli',
+    noFlavors: 'Nessun gusto in questa categoria.',
+  },
+}[lang];
+
+const activeCategory = 'featured';
+const filteredFlavors = getFlavorsByCategory(activeCategory);
+---
+<section id="speisekarte" class="section bg-background" aria-labelledby="menu-heading">
+  <div class="container-fluid">
+    <header class="text-center max-w-3xl mx-auto mb-fluid-12 reveal" data-reveal>
+      <span class="badge-primary mb-fluid-4 inline-block animate-fade-in-up">🍨 {t.title}</span>
+      <h2 id="menu-heading" class="font-display text-fluid-3xl lg:text-fluid-4xl font-bold text-foreground mb-fluid-4">
+        {t.title}
+      </h2>
+      <p class="text-fluid-lg text-muted-foreground">{t.subtitle}</p>
+    </header>
+
+    <div class="flex flex-wrap justify-center gap-2 mb-fluid-10 reveal" data-reveal role="tablist" aria-label="Kategorien filtern">
+      {categories.map((cat, i) => (
+        <button
+          role="tab"
+          aria-selected={cat.id === activeCategory}
+          aria-controls={`panel-${cat.id}`}
+          id={`tab-${cat.id}`}
+          class="btn-ghost px-fluid-4 py-fluid-2 text-fluid-sm font-medium transition-all duration-300
+            {cat.id === activeCategory ? 'bg-accent text-accent-foreground shadow-glow' : 'hover:bg-muted'}
+            stagger-{i % 6}"
+          data-category={cat.id}
+          data-reveal
+          style="transition-delay: {i * 50}ms"
+        >
+          {cat.name}
+        </button>
+      ))}
+    </div>
+
+    <div id="panel-featured" role="tabpanel" aria-labelledby="tab-featured" class="reveal" data-reveal>
+      {filteredFlavors.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredFlavors.map((flavor, i) => (
+            <FlavorCard flavor={flavor} lang={lang} index={i} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-center text-muted-foreground py-fluid-10">{t.noFlavors}</p>
+      )}
+    </div>
+
+    <div class="text-center mt-fluid-10 reveal" data-reveal>
+      <a href="/speisekarte" class="btn-outline text-fluid-base px-fluid-8 py-fluid-4">
+        {t.viewDetails}
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Category filter tabs
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.dataset.category;
+      if (!category) return;
+
+      tabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('bg-accent', 'text-accent-foreground', 'shadow-glow');
+        t.classList.add('hover:bg-muted');
+      });
+
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('bg-accent', 'text-accent-foreground', 'shadow-glow');
+      tab.classList.remove('hover:bg-muted');
+
+      panels.forEach(panel => {
+        panel.hidden = panel.id !== `panel-${category}`;
+      });
+    });
+  });
+</script>

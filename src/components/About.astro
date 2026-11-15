@@ -1,0 +1,122 @@
+---
+import { siteConfig } from '../content/site.ts';
+import { LeafIcon, HandIcon, BookIcon, GlobeIcon } from './icons.tsx';
+
+interface Props {
+  lang?: 'de' | 'en' | 'it';
+}
+const { lang = 'de' } = Astro.props;
+
+const t = {
+  de: {
+    title: 'Unsere Geschichte',
+    subtitle: 'Seit 1987: Tradition, Handwerk, Leidenschaft.',
+    story: siteConfig.owner.story,
+    valuesTitle: 'Was uns antreibt',
+    values: [
+      { title: 'Echte Zutaten', description: 'Keine Fertigmischen, keine künstlichen Aromen. Nur Milch, Sahne, Früchte, Nüsse, Schokolade — in bester Qualität.', icon: LeafIcon },
+      { title: 'Handwerk', description: 'Jede Sorte wird in kleinen Chargen von Hand gerührt. Keine industrielle Massenproduktion.', icon: HandIcon },
+      { title: 'Tradition', description: 'Rezepte von Nonno Giuseppe aus Bologna, unverändert seit 1987. Authentisch italienisch.', icon: BookIcon },
+      { title: 'Nachhaltigkeit', description: 'Regionale Milch, Bio-Zutaten wo möglich, kurze Wege, faire Preise für Produzenten.', icon: GlobeIcon },
+    ],
+    certifications: 'Auszeichnungen & Mitgliedschaften',
+  },
+  en: {
+    title: 'Our Story',
+    subtitle: 'Since 1987: Tradition, Craft, Passion.',
+    story: siteConfig.owner.storyEn,
+    valuesTitle: 'What Drives Us',
+    values: [
+      { title: 'Real Ingredients', description: 'No premixes, no artificial flavors. Only milk, cream, fruits, nuts, chocolate — in the finest quality.', icon: LeafIcon },
+      { title: 'Craftsmanship', description: 'Every flavor is hand-churned in small batches. No industrial mass production.', icon: HandIcon },
+      { title: 'Tradition', description: 'Recipes from Nonno Giuseppe from Bologna, unchanged since 1987. Authentically Italian.', icon: BookIcon },
+      { title: 'Sustainability', description: 'Regional milk, organic ingredients where possible, short distances, fair prices for producers.', icon: GlobeIcon },
+    ],
+    certifications: 'Awards & Memberships',
+  },
+  it: {
+    title: 'La Nostra Storia',
+    subtitle: 'Dal 1987: Tradizione, Artigianato, Passione.',
+    story: siteConfig.owner.story,
+    valuesTitle: 'Ciò Che Ci Guida',
+    values: [
+      { title: 'Ingredienti Veri', description: 'Nessun preparato, nessun aroma artificiale. Solo latte, panna, frutta, noci, cioccolato — della migliore qualità.', icon: LeafIcon },
+      { title: 'Artigianato', description: 'Ogni gusto è mantecato a mano in piccoli lotti. Nessuna produzione industriale.', icon: HandIcon },
+      { title: 'Tradizione', description: 'Ricette di Nonno Giuseppe da Bologna, invariate dal 1987. Autenticamente italiano.', icon: BookIcon },
+      { title: 'Sostenibilità', description: 'Latte regionale, ingredienti bio dove possibile, filiera corta, prezzi equi per i produttori.', icon: GlobeIcon },
+    ],
+    certifications: 'Riconoscimenti & Membri',
+  },
+}[lang];
+---
+
+<section id="ueber-uns" class="section bg-venezia-cream/30" aria-labelledby="about-heading">
+  <div class="container-fluid">
+    <div class="grid lg:grid-cols-2 gap-fluid-12 items-center">
+      <div class="reveal" data-reveal>
+        <span class="badge-primary mb-fluid-4 inline-block">🍦 {t.subtitle}</span>
+        <h2 id="about-heading" class="font-display text-fluid-3xl lg:text-fluid-4xl font-bold text-foreground mb-fluid-6">
+          {t.title}
+        </h2>
+        <div class="prose prose-lg max-w-none text-muted-foreground">
+          <p class="mb-fluid-4 text-pretty">{t.story}</p>
+        </div>
+
+        <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-6">{t.valuesTitle}</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {t.values.map((value, i) => (
+            <div class="card p-fluid-4 reveal stagger-{i + 1}" data-reveal style="transition-delay: {(i + 1) * 100}ms">
+              <div class="flex items-start gap-3">
+                <div class="shrink-0 h-12 w-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center" aria-hidden="true">
+                  <value.icon class="h-6 w-6" />
+                </div>
+                <div>
+                  <h4 class="font-display text-fluid-lg font-bold text-foreground mb-1">{value.title}</h4>
+                  <p class="text-fluid-sm text-muted-foreground">{value.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="relative reveal" data-reveal>
+        <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-card relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-venezia-warm via-venezia-peach to-venezia-mint" aria-hidden="true"></div>
+          <img
+            src="/images/about/workshop.webp"
+            alt="Eiscafe Venezia Werkstatt - Handwerkliche Eisherstellung"
+            class="relative w-full h-full object-cover opacity-90"
+            width="800"
+            height="600"
+            loading="eager"
+          />
+          <div class="absolute bottom-0 left-0 right-0 p-fluid-6 bg-gradient-to-t from-black/80 to-transparent" aria-hidden="true">
+            <p class="text-foreground/90 text-fluid-sm font-medium">Täglich frisch in unserer Manufaktur</p>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-6 -right-6 lg:-bottom-8 lg:-right-8 bg-card rounded-2xl p-fluid-6 shadow-card max-w-xs animate-float" aria-hidden="true">
+          <div class="flex items-center gap-3">
+            <div class="h-14 w-14 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
+              <LeafIcon class="h-7 w-7" />
+            </div>
+            <div>
+              <div class="font-display text-2xl font-bold text-foreground">38+</div>
+              <div class="text-fluid-sm text-muted-foreground">Eissorten im Sortiment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-fluid-16 reveal" data-reveal>
+      <h3 class="font-display text-fluid-xl font-bold text-foreground text-center mb-fluid-6">{t.certifications}</h3>
+      <div class="flex flex-wrap justify-center gap-4 text-fluid-sm text-muted-foreground">
+        {siteConfig.certifications.map((cert, i) => (
+          <span class="badge bg-card border border-border px-fluid-4 py-fluid-2 stagger-{i % 6}" data-reveal style="transition-delay: {i * 100}ms">{cert}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

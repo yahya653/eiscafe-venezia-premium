@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Menu from '../components/Menu.astro';
+import About from '../components/About.astro';
+import Location from '../components/Location.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Eiscafe Venezia Magstadt — Authentisches Italienisches Eis seit 1987" description="Handgemachtes Eis nach traditionellen Rezepten, beste Zutaten, Leidenschaft seit 1987. 38+ Sorten, vegan & Sorbets. Besuchen Sie uns in Magstadt!" lang="de">
+  <Header />
+
+  <main id="main">
+    <Hero lang="de" />
+    <Menu lang="de" />
+    <About lang="de" />
+    <Location lang="de" />
+    <Contact lang="de" />
+  </main>
+
+  <Footer lang="de" />
+</BaseLayout>
