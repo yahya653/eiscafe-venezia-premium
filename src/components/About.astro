@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from '../content/site.ts';
-import { LeafIcon, HandIcon, BookIcon, GlobeIcon } from './icons.tsx';
+import Icon from './Icon.astro';
 
 interface Props {
   lang?: 'de' | 'en' | 'it';
@@ -14,10 +14,10 @@ const t = {
     story: siteConfig.owner.story,
     valuesTitle: 'Was uns antreibt',
     values: [
-      { title: 'Echte Zutaten', description: 'Keine Fertigmischen, keine künstlichen Aromen. Nur Milch, Sahne, Früchte, Nüsse, Schokolade — in bester Qualität.', icon: LeafIcon },
-      { title: 'Handwerk', description: 'Jede Sorte wird in kleinen Chargen von Hand gerührt. Keine industrielle Massenproduktion.', icon: HandIcon },
-      { title: 'Tradition', description: 'Rezepte von Nonno Giuseppe aus Bologna, unverändert seit 1987. Authentisch italienisch.', icon: BookIcon },
-      { title: 'Nachhaltigkeit', description: 'Regionale Milch, Bio-Zutaten wo möglich, kurze Wege, faire Preise für Produzenten.', icon: GlobeIcon },
+      { title: 'Echte Zutaten', description: 'Keine Fertigmischen, keine künstlichen Aromen. Nur Milch, Sahne, Früchte, Nüsse, Schokolade — in bester Qualität.', icon: 'leaf' },
+      { title: 'Handwerk', description: 'Jede Sorte wird in kleinen Chargen von Hand gerührt. Keine industrielle Massenproduktion.', icon: 'hand' },
+      { title: 'Tradition', description: 'Rezepte von Nonno Giuseppe aus Bologna, unverändert seit 1987. Authentisch italienisch.', icon: 'book' },
+      { title: 'Nachhaltigkeit', description: 'Regionale Milch, Bio-Zutaten wo möglich, kurze Wege, faire Preise für Produzenten.', icon: 'globe' },
     ],
     certifications: 'Auszeichnungen & Mitgliedschaften',
   },
@@ -27,10 +27,10 @@ const t = {
     story: siteConfig.owner.storyEn,
     valuesTitle: 'What Drives Us',
     values: [
-      { title: 'Real Ingredients', description: 'No premixes, no artificial flavors. Only milk, cream, fruits, nuts, chocolate — in the finest quality.', icon: LeafIcon },
-      { title: 'Craftsmanship', description: 'Every flavor is hand-churned in small batches. No industrial mass production.', icon: HandIcon },
-      { title: 'Tradition', description: 'Recipes from Nonno Giuseppe from Bologna, unchanged since 1987. Authentically Italian.', icon: BookIcon },
-      { title: 'Sustainability', description: 'Regional milk, organic ingredients where possible, short distances, fair prices for producers.', icon: GlobeIcon },
+      { title: 'Real Ingredients', description: 'No premixes, no artificial flavors. Only milk, cream, fruits, nuts, chocolate — in the finest quality.', icon: 'leaf' },
+      { title: 'Craftsmanship', description: 'Every flavor is hand-churned in small batches. No industrial mass production.', icon: 'hand' },
+      { title: 'Tradition', description: 'Recipes from Nonno Giuseppe from Bologna, unchanged since 1987. Authentically Italian.', icon: 'book' },
+      { title: 'Sustainability', description: 'Regional milk, organic ingredients where possible, short distances, fair prices for producers.', icon: 'globe' },
     ],
     certifications: 'Awards & Memberships',
   },
@@ -40,10 +40,10 @@ const t = {
     story: siteConfig.owner.story,
     valuesTitle: 'Ciò Che Ci Guida',
     values: [
-      { title: 'Ingredienti Veri', description: 'Nessun preparato, nessun aroma artificiale. Solo latte, panna, frutta, noci, cioccolato — della migliore qualità.', icon: LeafIcon },
-      { title: 'Artigianato', description: 'Ogni gusto è mantecato a mano in piccoli lotti. Nessuna produzione industriale.', icon: HandIcon },
-      { title: 'Tradizione', description: 'Ricette di Nonno Giuseppe da Bologna, invariate dal 1987. Autenticamente italiano.', icon: BookIcon },
-      { title: 'Sostenibilità', description: 'Latte regionale, ingredienti bio dove possibile, filiera corta, prezzi equi per i produttori.', icon: GlobeIcon },
+      { title: 'Ingredienti Veri', description: 'Nessun preparato, nessun aroma artificiale. Solo latte, panna, frutta, noci, cioccolato — della migliore qualità.', icon: 'leaf' },
+      { title: 'Artigianato', description: 'Ogni gusto è mantecato a mano in piccoli lotti. Nessuna produzione industriale.', icon: 'hand' },
+      { title: 'Tradizione', description: 'Ricette di Nonno Giuseppe da Bologna, invariate dal 1987. Autenticamente italiano.', icon: 'book' },
+      { title: 'Sostenibilità', description: 'Latte regionale, ingredienti bio dove possibile, filiera corta, prezzi equi per i produttori.', icon: 'globe' },
     ],
     certifications: 'Riconoscimenti & Membri',
   },
@@ -68,7 +68,7 @@ const t = {
             <div class="card p-fluid-4 reveal stagger-{i + 1}" data-reveal style="transition-delay: {(i + 1) * 100}ms">
               <div class="flex items-start gap-3">
                 <div class="shrink-0 h-12 w-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center" aria-hidden="true">
-                  <value.icon class="h-6 w-6" />
+                  <Icon name={value.icon} class="h-6 w-6" />
                 </div>
                 <div>
                   <h4 class="font-display text-fluid-lg font-bold text-foreground mb-1">{value.title}</h4>
@@ -99,7 +99,7 @@ const t = {
         <div class="absolute -bottom-6 -right-6 lg:-bottom-8 lg:-right-8 bg-card rounded-2xl p-fluid-6 shadow-card max-w-xs animate-float" aria-hidden="true">
           <div class="flex items-center gap-3">
             <div class="h-14 w-14 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
-              <LeafIcon class="h-7 w-7" />
+              <Icon name="leaf" class="h-7 w-7" />
             </div>
             <div>
               <div class="font-display text-2xl font-bold text-foreground">38+</div>

@@ -1,49 +1,48 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+layout: '../layouts/BaseLayout.astro'
+title: "Seite nicht gefunden"
+description: "Die gesuchte Seite existiert nicht. Zurück zur Startseite von Eiscafé Venezia Magstadt."
+noIndex: true
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 ---
+<Header />
 
-<BaseLayout title="Seite nicht gefunden | Eiscafe Venezia" description="Die gesuchte Seite existiert nicht. Zurück zur Startseite von Eiscafe Venezia Magstadt." lang="de" noIndex>
-  <Header />
-
-  <main id="main" class="min-h-[70vh] flex items-center justify-center">
-    <div class="container-fluid text-center py-fluid-20">
-      <div class="max-w-md mx-auto reveal" data-reveal>
-        <div class="mb-fluid-8">
-          <svg class="mx-auto h-32 w-32 text-accent/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-        </div>
-        <h1 class="font-display text-fluid-5xl lg:text-fluid-6xl font-bold text-foreground mb-fluid-4">
-          404
-        </h1>
-        <h2 class="font-display text-fluid-2xl lg:text-fluid-3xl font-medium text-muted-foreground mb-fluid-6">
-          Seite nicht gefunden
-        </h2>
-        <p class="text-fluid-lg text-muted-foreground mb-fluid-10 max-w-lg mx-auto text-pretty">
-          Ups! Die gesuchte Seite existiert nicht oder wurde verschoben. Keine Sorge, unser Eis ist trotzdem da.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/" class="btn-primary text-fluid-base px-fluid-8 py-fluid-4">
-            Zur Startseite
-          </a>
-          <a href="#speisekarte" class="btn-outline text-fluid-base px-fluid-8 py-fluid-4">
-            Speisekarte ansehen
-          </a>
-        </div>
-        <div class="mt-fluid-12 flex items-center justify-center gap-6 text-fluid-sm text-muted-foreground">
-          <a href="tel:+497159123456" class="hover:text-accent transition-colors">Anrufen</a>
-          <span>|</span>
-          <a href="mailto:info@eiscafe-venezia.de" class="hover:text-accent transition-colors">E-Mail</a>
-          <span>|</span>
-          <a href="#standort" class="hover:text-accent transition-colors">Route planen</a>
-        </div>
+<main id="main" class="min-h-[70vh] flex items-center justify-center">
+  <div class="container-fluid text-center py-fluid-20">
+    <div class="max-w-md mx-auto reveal" data-reveal>
+      <div class="mb-fluid-8">
+        <svg class="mx-auto h-32 w-32 text-accent/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <h1 class="font-display text-fluid-5xl lg:text-fluid-6xl font-bold text-foreground mb-fluid-4">
+        404
+      </h1>
+      <h2 class="font-display text-fluid-2xl lg:text-fluid-3xl font-medium text-muted-foreground mb-fluid-6">
+        Seite nicht gefunden
+      </h2>
+      <p class="text-fluid-lg text-muted-foreground mb-fluid-10 max-w-lg mx-auto text-pretty">
+        Ups! Die gesuchte Seite existiert nicht oder wurde verschoben. Keine Sorge, unser Eis ist trotzdem da.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/" class="btn-primary text-fluid-base px-fluid-8 py-fluid-4">
+          Zur Startseite
+        </a>
+        <a href="#speisekarte" class="btn-outline text-fluid-base px-fluid-8 py-fluid-4">
+          Speisekarte ansehen
+        </a>
+      </div>
+      <div class="mt-fluid-12 flex items-center justify-center gap-6 text-fluid-sm text-muted-foreground">
+        <a href="tel:+4971594207558" class="hover:text-accent transition-colors">Anrufen</a>
+        <span>|</span>
+        <a href="mailto:giovannamasia73@yahoo.de" class="hover:text-accent transition-colors">E-Mail</a>
+        <span>|</span>
+        <a href="#standort" class="hover:text-accent transition-colors">Route planen</a>
       </div>
     </div>
   </main>
 
-  <Footer lang="de" />
-</BaseLayout>
+<Footer lang="de" />

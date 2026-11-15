@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '../content/site.ts';
+import Icon from './Icon.astro';
 
 interface Props {
   lang?: 'de' | 'en' | 'it';
@@ -140,10 +141,7 @@ function formatTime(time: string): string {
       <div class="space-y-6 reveal" data-reveal>
         <div class="card p-fluid-6">
           <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
-            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
+            <Icon name="sun" class="h-6 w-6 text-accent" />
             {t.address}
           </h3>
           <address class="not-italic text-muted-foreground space-y-1">
@@ -156,10 +154,7 @@ function formatTime(time: string): string {
 
         <div class="card p-fluid-6">
           <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
-            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
+            <Icon name="sun" class="h-6 w-6 text-accent" />
             {t.hours}
           </h3>
           <dl class="space-y-2 text-fluid-sm">
@@ -197,17 +192,13 @@ function formatTime(time: string): string {
 
         <div class="card p-fluid-6">
           <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
-            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
+            <Icon name="package" class="h-6 w-6 text-accent" />
             {t.contact}
           </h3>
           <div class="space-y-3 text-fluid-sm">
             <a href={`tel:${siteConfig.location.phone}`} class="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group">
               <div class="h-10 w-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
+                <Icon name="package" class="h-5 w-5" />
               </div>
               <div>
                 <p class="text-foreground font-medium">{siteConfig.location.phone.replace('+49 ', '0')}</p>
@@ -216,10 +207,7 @@ function formatTime(time: string): string {
             </a>
             <a href={`mailto:${siteConfig.location.email}`} class="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group">
               <div class="h-10 w-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
+                <Icon name="package" class="h-5 w-5" />
               </div>
               <div>
                 <p class="text-foreground font-medium">{siteConfig.location.email}</p>
@@ -231,26 +219,14 @@ function formatTime(time: string): string {
 
         <div class="card p-fluid-6">
           <h3 class="font-display text-fluid-xl font-bold text-foreground mb-fluid-4 flex items-center gap-2">
-            <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2"/>
-              <path d="M8 21h8M12 17v4"/>
-            </svg>
+            <Icon name="car" class="h-6 w-6 text-accent" />
             {t.amenities}
           </h3>
           <ul class="grid sm:grid-cols-2 gap-3">
             {siteConfig.amenities.map(amenity => (
               <li class="flex items-center gap-3 text-fluid-sm">
                 <div class="h-8 w-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0" aria-hidden="true">
-                  {(() => {
-                    switch (amenity.icon) {
-                      case 'sun': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>;
-                      case 'users': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
-                      case 'package': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M15.5 3.5a2 2 0 0 1 0 2.83"/><path d="M16 7h5.5"/><path d="M16 11h5.5"/><path d="M16 15h5.5"/></svg>;
-                      case 'dog': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a6 6 0 0 0-6 6v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a6 6 0 0 0-6-6z"/><path d="M9 10a1 1 0 0 1 2 0 1 1 0 0 1-2 0z"/><path d="M15 10a1 1 0 0 1 2 0 1 1 0 0 1-2 0z"/><path d="M12 16v2"/></svg>;
-                      case 'wifi': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>;
-                      case 'car': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.3-1.4.7l-1.1 1.1C1.6 8.7 1 9.6 1 10.5V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>;
-                    }
-                  })()}
+                  <Icon name={amenity.icon} class="h-5 w-5" />
                 </div>
                 <span class="text-muted-foreground">{amenity.name}</span>
               </li>

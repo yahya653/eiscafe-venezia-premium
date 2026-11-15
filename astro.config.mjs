@@ -7,9 +7,9 @@ export default defineConfig({
   output: 'static',
   build: {
     assets: 'assets',
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'never',
   },
-  compressHTML: true,
+  compressHTML: false,
   prefetch: true,
   image: {
     service: {
